@@ -71,13 +71,13 @@ class TermsAndConditions(models.Model):
         good_one = language in settings.LANGUAGES \
             and language \
             or DEFAULT_LANGUAGE
-        just_in_case=""
-        to_return = None,None
+        just_in_case = ("", "")
+        to_return = (None, None)
         for translated_term in self.texts.all():
             if translated_term.language == language and len(translated_term.tr_text):
                 to_return = unicode(translated_term.tr_text), translated_term.language
             if translated_term.language == DEFAULT_LANGUAGE:
-              just_in_case = unicode(translated_term.tr_text),DEFAULT_LANGUAGE
+              just_in_case = unicode(translated_term.tr_text), DEFAULT_LANGUAGE
         ## walking around ReST generating a 4.1 full html doc
         ## Accessibility
         text, lang = to_return if to_return[0] else just_in_case
